@@ -1,7 +1,7 @@
 /*
 	Theme Name: Skyline Theme
 	Theme URI: http://www.blogsynthesis.com/themes/skyline/
-	Description: This theme is designed for Genesis Framework. This theme is perfect for bloggers. Rather than a portal this theme provides most of the custmizations for regular updating bloggers.
+	Description: This theme is designed for Genesis Framework. This theme is perfect for bloggers. Rather than a portal this theme provides most of the customizations for regular updating bloggers.
 	Author: BlogSynthesis
 	Author URI: http://www.blogsynthesis.com/
 	Version: 1.0.0
@@ -1742,6 +1742,10 @@ Media Queries
 
 @media only screen and (max-width: 767px) {
 
+	.home-cta-left ,
+	.home-cta-right,
+	.home-featured-left,
+	.home-featured-right,
 	.five-sixths,
 	.four-sixths,
 	.one-fourth,
@@ -1756,5 +1760,19 @@ Media Queries
 		margin: 0;
 		width: 100%;
 	}
+	
+	.home-cta-left .widget {
+		padding: 20px 30px;
+		margin-bottom: 20px;
+	}
 
+}
+
+
+@media only screen and (max-width: 48px) {
+
+	.home-cta-left .widget {
+		padding: 0;
+		margin-bottom: 10px;
+	}
 }
