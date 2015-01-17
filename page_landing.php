@@ -1,12 +1,4 @@
 <?php
-/**
- * This file adds the Landing template to the Minimum Pro Theme.
- *
- * @author StudioPress
- * @package Generate
- * @subpackage Customizations
- */
-
 /*
 Template Name: Landing
 */

@@ -16,4 +16,4 @@ Github project link: https://github.com/BlogSynthesis/skyline
 
 === Theme Support ===
 
-Please visit http://www.wpavenue.com for theme support.
+Please visit http://my.blogsynthesis.com/forums/ for theme support.

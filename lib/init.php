@@ -5,7 +5,7 @@
  * This file is reserved for adding new functionality in future. 
  *
  * @package   Skyline Theme
- * @version   1.0.0
+ * @version   2.0.0
  * @author    Anand Kumar <anand@blogsynthesis.com>
  * @copyright Copyright (c) 2013, Anand Kumar
  * @link      http://www.blogsynthesis.com/themes/skyline/
@@ -15,30 +15,56 @@
 //* Do not remove in order to get support and updates.
 add_action( 'genesis_meta', 'wpavenue_meta' );
 function wpavenue_meta() {
-	echo "<!-- Skyline WordPress Theme v1.0.0 - by Anand Kumar - http://www.blogsynthesis.com/themes/skyline/ -->\n";
+	echo "<!-- Skyline WordPress Theme v2.0 - by Anand Kumar - http://www.blogsynthesis.com/themes/skyline/ -->\n";
 }
+
+
+/* Do theme setup on the 'after_setup_theme' hook. */
+add_action( 'after_setup_theme', 'bowser_jr_theme_setup', 11 );
+/**
+ * Theme setup function. 
+ * @since  0.1.0
+ */
+function bowser_jr_theme_setup(){
+
+	/* updater args */
+	$updater_args = array(
+		'repo_uri'   => 'http://my.blogsynthesis.com/',
+		'repo_slug'  => 'skyline',
+		'username'    => true,
+		'dashboard'  => true,
+	);
+
+	/* add support for updater */
+	add_theme_support( 'auto-hosted-child-theme-updater', $updater_args );
+}
+
+/* Load theme updater class */
+require_once( trailingslashit( get_stylesheet_directory() ) . 'lib/child-theme-updater.php' );
+new Bowser_Jr_Child_Theme_Updater;
+
 
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Skyline Theme' );
-define( 'CHILD_THEME_URL', 'http://www.wpavenue.com/themes/skyline/' );
-define( 'CHILD_THEME_VERSION', '1.0.0' );
+define( 'CHILD_THEME_URL', 'http://my.blogsynthesis.com/themes/skyline/' );
+define( 'CHILD_THEME_VERSION', '2.0.0' );
 
 //* Add HTML5 markup structure
 add_theme_support( 'html5' );
 
-add_action( 'wp_enqueue_scripts', 'custom_enqueue_script' );
+// add_action( 'wp_enqueue_scripts', 'custom_enqueue_script' );
 function custom_enqueue_script() {
 	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/custom.js', array( 'jquery' ), '', true );
 }
 
 //* Add Genesis Box on Single Posts
-add_action('genesis_entry_content', 'include_share_box', 9 );
+// add_action('genesis_entry_content', 'include_share_box', 9 );
 function include_share_box() {
     if ( is_single() )
     require(CHILD_DIR.'/sharebar.php');
 }
 
-add_action('wp_footer', 'include_share_js', 9 );
+// add_action('wp_footer', 'include_share_js', 9 );
 function include_share_js() {
     if ( is_single() )
     require(CHILD_DIR.'/lib/sharebar-js.php');
@@ -57,9 +83,9 @@ genesis_register_sidebar( array(
 ) );
 
 //* Add the top widget after the post content
-add_action( 'genesis_before_loop', 'custom_top_widgets' );
+add_action( 'genesis_after_header', 'custom_top_widgets' );
 function custom_top_widgets() {
-	if ( is_single() ) {
+	if ( is_single() || is_archive() ) {
 		genesis_widget_area( 'single-cta', array( 'before' => '<div id="single-cta" class="box-section"><div class="wrap">', 'after' => '</div></div>', ) ); 
 	}
 }

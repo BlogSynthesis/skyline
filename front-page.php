@@ -1,5 +1,14 @@
 <?php
 
+add_filter('genesis_pre_get_option_site_layout', '__genesis_return_full_width_content');
+
+//* Remove the site description
+//do_action( 'genesis_after_header', 'genesis_seo_site_description' );
+
+
+//* Remove the entry title (requires HTML5 theme support)
+remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+
 add_action( 'genesis_meta', 'bs_home_genesis_meta' );
 /**
  * Add widget support for homepage.
@@ -11,7 +20,7 @@ function bs_home_genesis_meta() {
 	
 		add_action( 'genesis_after_header', 'bs_home_loop_helper' );
 		add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
-		remove_action( 'genesis_loop', 'genesis_do_loop' );
+		//remove_action( 'genesis_loop', 'genesis_do_loop' );
 		//* Add homepage widgets
 		add_action( 'genesis_loop', 'child_do_custom_loop' );
 
@@ -26,19 +35,19 @@ function bs_home_loop_helper() {
 
 	if ( is_active_sidebar( 'home-cta-left' ) || is_active_sidebar( 'home-cta-right' ) ) {
 
-			echo '<div id="home-cta"><div class="wrap clearfix">';
+		echo '<div id="home-cta"><div class="wrap flexbox">';
 
-			echo '<div class="home-cta-left">';
-			dynamic_sidebar( 'home-cta-left' );
-			echo '</div><!-- end .home-cta-left -->';	
+		echo '<div class="home-cta-left">';
+		dynamic_sidebar( 'home-cta-left' );
+		echo '</div><!-- end .home-cta-left -->';	
 
-			echo '<div class="home-cta-right">';
-			dynamic_sidebar( 'home-cta-right' );
-			echo '</div><!-- end .home-cta-right -->';
+		echo '<div class="home-cta-right">';
+		dynamic_sidebar( 'home-cta-right' );
+		echo '</div><!-- end .home-cta-right -->';
 
-			echo '</div><!-- end .wrap --></div><!-- end #home-cta -->';	
+		echo '</div><!-- end .wrap --></div><!-- end #home-cta -->';	
 
-		}
+	}
 
 }
 
